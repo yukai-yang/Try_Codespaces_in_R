@@ -1,8 +1,17 @@
 ###############################################################
 # the main script
 
-set.seed(100)
-
+if(!requireNamespace("parallel")) install.packages("parallel")
 source("utilities.R")
 
-write.table(ret$gamma_1, "output.txt")
+sink("output.txt")
+
+cat(paste("Number of cores", parallel::detectCores()), "\n")
+
+ptm <- proc.time()
+
+ret = parallel::mclapply(1:10, func_wrapper)
+
+write.table(ret, "results.dat")
+
+proc.time() - ptm

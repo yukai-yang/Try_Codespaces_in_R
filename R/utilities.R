@@ -4,11 +4,17 @@
 if(!requireNamespace("devtools")) install.packages("devtools")
 devtools::install_github("yukai-yang/FE")
 
-mR = as.matrix(portfolio_m[,25:124])
-vRf = as.matrix(portfolio_m[,"Tbill"])
-mZ = mR - c(vRf)
+func_wrapper <- function(num){
+    mR = as.matrix(FE::portfolio_m[,25:124])
+    vRf = as.matrix(FE::portfolio_m[,"Tbill"])
+    mZ = mR - c(vRf)
 
-vRm = as.matrix(portfolio_m[,"Market"])
-vZm = c(vRm - vRf)
+    vRm = as.matrix(FE::portfolio_m[,"Market"])
+    vZm = c(vRm - vRf)
 
-ret = Fama_MacBeth(mZ, vZm)
+    ret = FE::Fama_MacBeth(mZ, vZm)
+
+    if(num <= length(ret)){ return(ret[[num]])
+    }else return(NULL)
+}
+
