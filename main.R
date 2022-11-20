@@ -6,6 +6,7 @@ n = 12
 if(!requireNamespace("parallel")) install.packages("parallel")
 source("R/utilities.R")
 
+if(!dir.exists("output")) dir.create("output")
 sink("output/output.txt")
 
 cat(paste("Number of cores", parallel::detectCores()), "\n")
