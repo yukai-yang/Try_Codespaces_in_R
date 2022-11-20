@@ -1,3 +1,0 @@
-Number of cores 2 
-   user  system elapsed 
-  1.134   0.403   1.608 

@@ -1,7 +1,7 @@
 ###############################################################
 # the main script
 
-n = 10
+n = 12
 
 if(!requireNamespace("parallel")) install.packages("parallel")
 source("R/utilities.R")
