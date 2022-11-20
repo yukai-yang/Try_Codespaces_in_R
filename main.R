@@ -1,6 +1,8 @@
 ###############################################################
 # the main script
 
+n = 10
+
 if(!requireNamespace("parallel")) install.packages("parallel")
 source("R/utilities.R")
 
@@ -10,8 +12,11 @@ cat(paste("Number of cores", parallel::detectCores()), "\n")
 
 ptm <- proc.time()
 
-ret = parallel::mclapply(1:10, func_wrapper)
+ret = parallel::mclapply(1:n, func_wrapper)
 
-write.table(ret, "output/results.dat")
+for(iter in 1:n){
+  if(!is.null(ret[[iter]]))
+    write.table(ret[[iter]], paste0("output/result",iter,".dat"))
+}
 
 proc.time() - ptm
